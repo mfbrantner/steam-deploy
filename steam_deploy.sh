@@ -82,41 +82,6 @@ EOF
 cat manifest.vdf
 echo ""
 
-if [ -n "$steam_totp" ]; then
-  echo ""
-  echo "#################################"
-  echo "#     Using SteamGuard TOTP     #"
-  echo "#################################"
-  echo ""
-else
-  if [ ! -n "$configVdf" ] || [ ! -n "$ssfnFileName" ] || [ ! -n "$ssfnFileContents" ]; then
-    echo "MFA inputs are missing or incomplete! Cannot proceed."
-    exit 1
-  fi
-
-  steam_totp="INVALID"
-
-  echo ""
-  echo "#################################"
-  echo "#    Copying SteamGuard Files   #"
-  echo "#################################"
-  echo ""
-
-  echo "Steam is installed in: $steamdir"
-
-  mkdir -p "$steamdir/config"
-
-  echo "Copying $steamdir/config/config.vdf..."
-  echo "$configVdf" | base64 -d > "$steamdir/config/config.vdf"
-  chmod 777 "$steamdir/config/config.vdf"
-
-  echo "Copying $steamdir/ssfn..."
-  echo "$ssfnFileContents" | base64 -d > "$steamdir/$ssfnFileName"
-  chmod 777 "$steamdir/$ssfnFileName"
-
-  echo "Finished Copying SteamGuard Files!"
-  echo ""
-fi
 
 echo ""
 echo "#################################"
@@ -124,7 +89,7 @@ echo "#        Test login             #"
 echo "#################################"
 echo ""
 
-steamcmd +set_steam_guard_code "$steam_totp" +login "$steam_username" "$steam_password" +quit;
+steamcmd +login "$steam_username" "$steam_password" +quit;
 
 ret=$?
 if [ $ret -eq 0 ]; then
