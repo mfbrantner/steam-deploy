@@ -83,6 +83,30 @@ cat manifest.vdf
 echo ""
 
 
+if [ ! -n "$configVdf" ]; then
+  echo "config.vdf is missing! Cannot proceed."
+  exit 1
+fi
+
+
+echo ""
+echo "#################################"
+echo "#       Copying config.vdf      #"
+echo "#################################"
+echo ""
+
+echo "Steam is installed in: $steamdir"
+
+mkdir -p "$steamdir/config"
+
+echo "Copying $steamdir/config/config.vdf..."
+echo "$configVdf" | base64 -d > "$steamdir/config/config.vdf"
+chmod 777 "$steamdir/config/config.vdf"
+
+echo "Finished Copying SteamGuard Files!"
+echo ""
+
+
 echo ""
 echo "#################################"
 echo "#        Test login             #"

@@ -10,6 +10,10 @@ inputs:
     required: true
     default: ''
     description: 'The password of your builder account.'
+  configVdf:
+    required: true
+    default: ''
+    description: 'The contents of STEAM_HOME/config/config.vdf.'
   appId:
     required: true
     default: ''
@@ -62,6 +66,7 @@ runs:
   env:
     steam_username: ${{ inputs.username }}
     steam_password: ${{ inputs.password }}
+    configVdf: ${{ inputs.configVdf }}
     appId: ${{ inputs.appId }}
     firstDepotIdOverride: ${{ inputs.firstDepotIdOverride }}
     buildDescription: ${{ inputs.buildDescription }}
