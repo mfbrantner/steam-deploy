@@ -113,7 +113,7 @@ echo "#        Test login             #"
 echo "#################################"
 echo ""
 
-steamcmd +login "$steam_username" "$steam_password" +quit;
+steamcmd +login "$steam_username" +quit;
 
 ret=$?
 if [ $ret -eq 0 ]; then
@@ -139,7 +139,7 @@ echo "#        Uploading build        #"
 echo "#################################"
 echo ""
 
-steamcmd +login "$steam_username" "$steam_password" +run_app_build "$manifest_path" +quit || (
+steamcmd +login "$steam_username" +run_app_build "$manifest_path" +quit || (
     echo ""
     echo "#################################"
     echo "#             Errors            #"

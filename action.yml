@@ -6,10 +6,6 @@ inputs:
     required: true
     default: ''
     description: 'The username of your builder account.'
-  password:
-    required: true
-    default: ''
-    description: 'The password of your builder account.'
   configVdf:
     required: true
     default: ''
@@ -65,7 +61,6 @@ runs:
   image: Dockerfile
   env:
     steam_username: ${{ inputs.username }}
-    steam_password: ${{ inputs.password }}
     configVdf: ${{ inputs.configVdf }}
     appId: ${{ inputs.appId }}
     firstDepotIdOverride: ${{ inputs.firstDepotIdOverride }}
